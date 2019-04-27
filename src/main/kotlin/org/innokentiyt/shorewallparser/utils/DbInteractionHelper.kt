@@ -21,5 +21,13 @@ class DbInteractionHelper {
                 throw se
             }
         }
+
+        fun createDbFromList(confDataList: List<ShWallParsedStringData>, confName: String, directory: String) {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        fun parseDbToList(dbConnectionData: DbConnectionData): List<ShWallParsedStringData> {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
     }
 }

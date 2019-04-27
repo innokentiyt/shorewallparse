@@ -9,11 +9,11 @@ class ShWallParseHelper {
     companion object {
         private val logger: Logger = LoggerFactory.getLogger(Application::class.java)
 
-        fun parseToList(confFile: File): List<ShWallParsedStringData> {
+        fun parseConfToList(confFile: File): List<ShWallParsedStringData> {
             TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
 
-        fun createDbFromList(confDataList: List<ShWallParsedStringData>, name: String, directory: String) {
+        fun createConfFromList(confDataList: List<ShWallParsedStringData>, dbName: String, directory: String) {
             TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
     }

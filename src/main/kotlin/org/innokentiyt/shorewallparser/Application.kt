@@ -1,6 +1,5 @@
 package org.innokentiyt.shorewallparser
 
-import com.typesafe.config.ConfigFactory
 import org.innokentiyt.shorewallparser.utils.DbConnectionData
 import org.innokentiyt.shorewallparser.utils.DbInteractionHelper
 import org.innokentiyt.shorewallparser.utils.ShWallParseHelper
@@ -8,10 +7,7 @@ import org.innokentiyt.shorewallparser.utils.ShWallParsedStringData
 import org.slf4j.Logger
 import java.io.File
 import java.lang.RuntimeException
-import java.sql.Statement
 import org.slf4j.LoggerFactory
-import java.sql.Connection
-import kotlin.concurrent.fixedRateTimer
 
 class Application {
     private val logger: Logger = LoggerFactory.getLogger(Application::class.java)
@@ -22,23 +18,14 @@ class Application {
         val directory = dbFile.parentFile.absolutePath
         logger.info("Opened file {}", dbFile.absolutePath)
 
-        //open and parse config or db file
-        val config = ConfigFactory.parseFile(File(dbPath))
-
-        //save config to dataclass
         val dbConnectionData = DbConnectionData(
-            pathToDb = config.getString("pathToDb"),
-            db = config.getString("dbName"),
-            user = config.getString("user"),
-            password = config.getString("password")
+            pathToDb = directory,
+            db = dbName
         )
-        logger.info(dbConnectionData.fullPath)
 
         //establish a connection to db
-        val connection = DbInteractionHelper.connectToDb(dbConnectionData)
-        val statement: Statement = connection.createStatement()
-        statement.queryTimeout = 30 //in seconds
-        logger.info(""+statement.queryTimeout)
+        val confDataList: List<ShWallParsedStringData> = DbInteractionHelper.parseDbToList(dbConnectionData)
+        ShWallParseHelper.createConfFromList(confDataList, dbName, directory)
     }
 
     fun convertConfToDb(confPath: String) {
@@ -47,9 +34,8 @@ class Application {
         val directory = confFile.parentFile.absolutePath
         logger.info("Opened file {}", confFile.absolutePath)
 
-        val confDataList: List<ShWallParsedStringData> = ShWallParseHelper.parseToList(confFile)
-
-        ShWallParseHelper.createDbFromList(confDataList, confName, directory)
+        val confDataList: List<ShWallParsedStringData> = ShWallParseHelper.parseConfToList(confFile)
+        DbInteractionHelper.createDbFromList(confDataList, confName, directory)
     }
 
     companion object {
