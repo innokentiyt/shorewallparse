@@ -1,0 +1,1 @@
+Place here Shorewall config file: <name>.conf
