@@ -1,6 +1,5 @@
 package org.innokentiyt.shorewallparser
 
-import com.sun.deploy.util.Waiter
 import org.innokentiyt.shorewallparser.utils.DbConnectionData
 import org.innokentiyt.shorewallparser.utils.DbInteractionHelper
 import org.innokentiyt.shorewallparser.utils.ShWallParseHelper
@@ -24,7 +23,6 @@ class Application {
             db = dbName
         )
 
-        //establish a connection to db
         val confDataList: List<ShWallParsedStringData> = DbInteractionHelper.parseDbToList(dbConnectionData)
         ShWallParseHelper.createConfFromList(confDataList, dbName, directory)
     }

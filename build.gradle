@@ -19,7 +19,7 @@ version '1.0'
 apply plugin: 'kotlin'
 apply plugin: 'application'
 
-mainClassName = 'org.innokentiyt.shorewallparser'
+mainClassName = 'org.innokentiyt.shorewallparser.Application'
 
 repositories {
     mavenCentral()
