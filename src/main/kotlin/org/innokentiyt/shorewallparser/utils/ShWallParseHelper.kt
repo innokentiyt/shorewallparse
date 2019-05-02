@@ -32,7 +32,7 @@ class ShWallParseHelper {
                             source = source,
                             dest = dest,
                             proto = line[3],
-                            ports = if (line.size == 5) line[4].split(",").sorted() else null
+                            ports = if ((line.size == 5) and line[4].isNotEmpty()) line[4].split(",").sorted() else null
                         ))
                     }
             }
