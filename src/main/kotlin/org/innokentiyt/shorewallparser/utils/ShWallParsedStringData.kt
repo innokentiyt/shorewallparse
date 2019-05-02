@@ -1,11 +1,9 @@
 package org.innokentiyt.shorewallparser.utils
 
-import java.net.Inet4Address
-
 data class ShWallParsedStringData(
     val action: String,
-    val source: Map<String, Inet4Address?>,
-    val dest: Map<String, List<Inet4Address>?>,
+    val source: Map<String, String?>,
+    val dest: Map<String, List<String>?>,
     val proto: String,
-    val ports: List<Int>?
+    val ports: List<String>? = null
 )

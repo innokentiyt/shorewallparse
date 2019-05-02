@@ -1,5 +1,6 @@
 package org.innokentiyt.shorewallparser
 
+import com.sun.deploy.util.Waiter
 import org.innokentiyt.shorewallparser.utils.DbConnectionData
 import org.innokentiyt.shorewallparser.utils.DbInteractionHelper
 import org.innokentiyt.shorewallparser.utils.ShWallParseHelper
@@ -43,6 +44,10 @@ class Application {
         @JvmStatic
         fun main(args: Array<String>) {
             when {
+                args.isNullOrEmpty() -> {
+                    System.out.println("Please drag a file (Shorewall config file .conf or SQLite .db file) over the application icon. Exiting in 5 seconds...")
+                    Thread.sleep(5000)
+                }
                 args[0].endsWith(".db", ignoreCase = true) -> Application().convertDbToConf(args[0])
                 args[0].endsWith(".conf", ignoreCase = true) -> Application().convertConfToDb(args[0])
                 else -> throw RuntimeException("ERROR: No correct file option is specified. Exiting...")
